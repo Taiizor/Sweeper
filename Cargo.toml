@@ -63,6 +63,10 @@ config = "0.14"
 # Testing utilities
 tempfile = "3.10"
 
+# Additional dependencies
+num_cpus = "1.16"
+shellexpand = "3.1"
+
 [dev-dependencies]
 assert_cmd = "2.0"
 predicates = "3.1"
