@@ -61,7 +61,7 @@ impl Category {
     }
     
     /// Create a category from a string
-    pub fn from_string(s: &str) -> Result<Self, String> {
+    pub fn from_string(s: &str) -> anyhow::Result<Self> {
         match s.to_lowercase().as_str() {
             "system" => Ok(Self::System),
             "development" => Ok(Self::Development),

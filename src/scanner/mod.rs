@@ -1,10 +1,9 @@
-use anyhow::{Context, Result};
+use anyhow::Result;
 use bytesize::ByteSize;
 use indicatif::{ProgressBar, ProgressStyle};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
-use tokio::sync::mpsc;
 use walkdir::{DirEntry, WalkDir};
 
 use crate::config::ScannerConfig;
@@ -75,7 +74,8 @@ impl Scanner {
         
         // Get patterns to use
         let patterns = if options.patterns.is_empty() {
-            self.pattern_manager.get_enabled_patterns(&self.config.enabled_categories)
+            // Get all patterns from all categories
+            self.pattern_manager.get_all_patterns()
         } else {
             options.patterns
                 .iter()

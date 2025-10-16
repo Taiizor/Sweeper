@@ -87,7 +87,7 @@ fn display_results(result: &crate::scanner::ScanResult, i18n: &I18n) -> Result<(
         }
         
         println!("\n{} {}", "▶".cyan(), category.bold());
-        println!("{}", "-".repeat(40).dim());
+        println!("{}", "-".repeat(40).dimmed());
         
         let mut category_size = 0u64;
         let mut displayed = 0;
@@ -117,9 +117,9 @@ fn display_results(result: &crate::scanner::ScanResult, i18n: &I18n) -> Result<(
         if matches.len() > MAX_ITEMS {
             println!(
                 "  {} {} {}",
-                "...".dim(),
-                i18n.get("and_more").dim(),
-                (matches.len() - MAX_ITEMS).to_string().dim()
+                "...".dimmed(),
+                i18n.get("and_more").dimmed(),
+                (matches.len() - MAX_ITEMS).to_string().dimmed()
             );
         }
         

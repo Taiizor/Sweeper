@@ -34,6 +34,11 @@ impl Registry {
             .collect()
     }
     
+    /// Get all patterns in the registry
+    pub fn get_all_patterns(&self) -> Vec<&Pattern> {
+        self.patterns.values().collect()
+    }
+    
     /// Register a new pattern
     fn register(&mut self, pattern: Pattern) {
         self.patterns.insert(pattern.id.clone(), pattern);

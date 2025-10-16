@@ -8,7 +8,7 @@ use trash;
 
 use crate::config::Config;
 use crate::i18n::I18n;
-use crate::patterns::{PatternManager, SafetyLevel};
+use crate::patterns::{PatternManager, pattern::SafetyLevel};
 use crate::scanner::{ScanOptions, Scanner};
 
 /// Execute clean command

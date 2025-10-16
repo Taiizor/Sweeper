@@ -1,6 +1,5 @@
 use anyhow::{Context, Result};
-use fluent::{FluentBundle, FluentResource};
-use fluent_bundle::resolver::errors::ResolverError;
+use fluent_bundle::{FluentBundle, FluentResource, FluentArgs};
 use std::collections::HashMap;
 use unic_langid::LanguageIdentifier;
 
@@ -100,7 +99,7 @@ impl I18n {
         let msg = bundle.get_message(key)?;
         let pattern = msg.value()?;
         
-        let mut fluent_args = fluent::FluentArgs::new();
+        let mut fluent_args = FluentArgs::new();
         for (k, v) in args {
             fluent_args.set(k.as_str(), v.as_str());
         }

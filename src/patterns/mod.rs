@@ -4,10 +4,9 @@ pub mod category;
 
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
-pub use pattern::{Pattern, PatternMatch, PatternType};
+pub use pattern::{Pattern, PatternMatch};
 pub use category::Category;
 pub use registry::Registry;
 
@@ -83,6 +82,21 @@ impl PatternManager {
             if let Ok(category) = Category::from_string(category_name) {
                 patterns.extend(self.get_patterns_by_category(&category));
             }
+        }
+        
+        patterns
+    }
+    
+    /// Get all available patterns
+    pub fn get_all_patterns(&self) -> Vec<&Pattern> {
+        let mut patterns = Vec::new();
+        
+        // Get all built-in patterns
+        patterns.extend(self.registry.get_all_patterns());
+        
+        // Add all custom patterns
+        for pattern in &self.custom_patterns {
+            patterns.push(pattern);
         }
         
         patterns

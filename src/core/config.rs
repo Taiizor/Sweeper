@@ -53,7 +53,7 @@ fn show_config(config: &Config, i18n: &I18n) -> Result<()> {
     }
     println!("  {} {}", i18n.get("timestamps").yellow(), config.logging.timestamps);
     
-    println!("\n{}", i18n.get("config_location").dim());
+    println!("\n{}", i18n.get("config_location").dimmed());
     println!("  {:?}", Config::config_path()?);
     
     Ok(())
@@ -64,7 +64,7 @@ fn edit_config(key: String, value: String, config: &Config, i18n: &I18n) -> Resu
     let mut new_config = config.clone();
     
     match key.as_str() {
-        "language" => new_config.language = value,
+        "language" => new_config.language = value.clone(),
         "colored_output" => new_config.colored_output = value.parse()?,
         "use_trash" => new_config.use_trash = value.parse()?,
         "require_confirmation" => new_config.require_confirmation = value.parse()?,
@@ -73,7 +73,7 @@ fn edit_config(key: String, value: String, config: &Config, i18n: &I18n) -> Resu
         "scanner.scan_hidden" => new_config.scanner.scan_hidden = value.parse()?,
         "scanner.threads" => new_config.scanner.threads = value.parse()?,
         "scanner.min_age_days" => new_config.scanner.min_age_days = value.parse()?,
-        "logging.level" => new_config.logging.level = value,
+        "logging.level" => new_config.logging.level = value.clone(),
         "logging.timestamps" => new_config.logging.timestamps = value.parse()?,
         _ => {
             println!("{}", i18n.get("invalid_config_key").red());
@@ -89,7 +89,7 @@ fn edit_config(key: String, value: String, config: &Config, i18n: &I18n) -> Resu
 }
 
 /// Reset configuration to defaults
-fn reset_config(force: bool, config: &Config, i18n: &I18n) -> Result<()> {
+fn reset_config(force: bool, _config: &Config, i18n: &I18n) -> Result<()> {
     if !force {
         print!("{} [y/N]: ", i18n.get("confirm_reset").yellow());
         std::io::Write::flush(&mut std::io::stdout())?;

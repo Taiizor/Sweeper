@@ -1,4 +1,5 @@
-use clap_complete::{generate, Generator, Shell as ClapShell};
+use clap::CommandFactory;
+use clap_complete::{generate as clap_generate, Shell as ClapShell};
 use std::io;
 
 use crate::cli::{Cli, Shell};
@@ -15,9 +16,5 @@ pub fn generate(shell: Shell) {
         Shell::Elvish => ClapShell::Elvish,
     };
     
-    generate_completion(clap_shell, &mut cmd, name, &mut io::stdout());
-}
-
-fn generate_completion<G: Generator>(gen: G, cmd: &mut clap::Command, name: String, buf: &mut dyn io::Write) {
-    generate(gen, cmd, name, buf);
+    clap_generate(clap_shell, &mut cmd, name, &mut io::stdout());
 }

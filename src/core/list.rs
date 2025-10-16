@@ -3,7 +3,7 @@ use colored::Colorize;
 
 use crate::config::Config;
 use crate::i18n::I18n;
-use crate::patterns::{Category, PatternManager};
+use crate::patterns::{Category, PatternManager, pattern::SafetyLevel};
 
 /// Execute list command
 pub fn execute(
@@ -40,10 +40,10 @@ pub fn execute(
         println!("\n{} {} {}", 
             cat.icon(),
             cat.display_name().cyan().bold(),
-            format!("({})", patterns.len()).dim()
+            format!("({})", patterns.len()).dimmed()
         );
         println!("  {}", cat.description().italic());
-        println!("  {}", "-".repeat(50).dim());
+        println!("  {}", "-".repeat(50).dimmed());
         
         for pattern in patterns {
             let platform_str = format!("{:?}", pattern.platforms)
@@ -54,48 +54,48 @@ pub fn execute(
                 .replace("Unix", "🖥️");
             
             let safety_color = match pattern.safety {
-                crate::patterns::SafetyLevel::VeryHigh => "green",
-                crate::patterns::SafetyLevel::High => "green",
-                crate::patterns::SafetyLevel::Medium => "yellow",
-                crate::patterns::SafetyLevel::Low => "red",
-                crate::patterns::SafetyLevel::VeryLow => "red",
+                SafetyLevel::VeryHigh => "green",
+                SafetyLevel::High => "green",
+                SafetyLevel::Medium => "yellow",
+                SafetyLevel::Low => "red",
+                SafetyLevel::VeryLow => "red",
             };
             
             println!(
                 "  {} {} {}",
-                "►".dim(),
+                "►".dimmed(),
                 pattern.name.bright_white(),
                 platform_str
             );
             
             println!(
                 "    {} {}",
-                i18n.get("pattern_id").dim(),
+                i18n.get("pattern_id").dimmed(),
                 pattern.id.yellow()
             );
             
             println!(
                 "    {} {}",
-                i18n.get("description").dim(),
+                i18n.get("description").dimmed(),
                 pattern.description
             );
             
             println!(
                 "    {} {}",
-                i18n.get("pattern").dim(),
+                i18n.get("pattern").dimmed(),
                 pattern.pattern.bright_blue()
             );
             
             println!(
                 "    {} {}",
-                i18n.get("safety").dim(),
+                i18n.get("safety").dimmed(),
                 format!("{:?}", pattern.safety).color(safety_color)
             );
             
             if let Some(ref size) = pattern.estimated_size {
                 println!(
                     "    {} {}",
-                    i18n.get("estimated_size").dim(),
+                    i18n.get("estimated_size").dimmed(),
                     size.green()
                 );
             }

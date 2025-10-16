@@ -198,17 +198,17 @@ impl Pattern {
         }
     }
     
-    fn match_regex(&self, path: &Path) -> bool {
+    fn match_regex(&self, _path: &Path) -> bool {
         // Implementation for regex matching
         false // Placeholder
     }
     
-    fn match_env_var(&self, path: &Path) -> bool {
+    fn match_env_var(&self, _path: &Path) -> bool {
         // Implementation for environment variable based matching
         false // Placeholder
     }
     
-    fn match_system_dir(&self, path: &Path) -> bool {
+    fn match_system_dir(&self, _path: &Path) -> bool {
         // Implementation for system directory matching
         false // Placeholder
     }
