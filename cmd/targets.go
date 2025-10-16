@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/Taiizor/Sweeper/internal/patterns"
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
@@ -22,8 +21,6 @@ func init() {
 }
 
 func runTargets(cmd *cobra.Command, args []string) error {
-	manager := patterns.NewManager()
-
 	color.Cyan("Available Cleaning Targets:")
 	fmt.Println(strings.Repeat("═", 60))
 

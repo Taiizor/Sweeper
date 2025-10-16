@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/Taiizor/Sweeper/internal/models"
 	"github.com/Taiizor/Sweeper/internal/ui"
@@ -96,7 +97,7 @@ func saveStatistics(result *models.CleanResult) error {
 	}
 
 	// Update statistics
-	stats.LastRun = result.Duration
+	stats.LastRun = time.Now()
 	stats.TotalRuns++
 	stats.TotalCleaned += int64(result.SuccessCount)
 	stats.TotalFreed += result.FreedSize
